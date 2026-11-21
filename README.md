@@ -544,3 +544,515 @@ Imagine you order food, sit at your table, and use your phone while waiting. Whe
 
 ---
 
+---
+
+# 10. OS Module in Node.js
+
+## What is the OS Module?
+
+- OS stands for **Operating System**.
+- It is a built-in core module in Node.js.
+- It provides information about the operating system on which the Node.js application is running.
+- It helps us access system-related information such as platform, CPU architecture, memory, hostname, and more.
+- We don't need to install any external package to use it.
+
+### Importing the OS Module
+
+```javascript
+const os = require("os");
+```
+
+## Commonly Used OS Module Methods
+
+### 1. os.arch()
+
+- Returns the CPU architecture of the operating system.
+
+```javascript
+console.log(os.arch());
+```
+
+**Example Output:**
+```text
+x64
+```
+
+### 2. os.platform()
+
+- Returns the operating system platform.
+
+```javascript
+console.log(os.platform());
+```
+
+**Example Output:**
+```text
+win32
+```
+
+### 3. os.hostname()
+
+- Returns the hostname of the computer.
+
+```javascript
+console.log(os.hostname());
+```
+
+**Example Output:**
+```text
+DESKTOP-ABC123
+```
+
+### 4. os.cpus()
+
+- Returns information about the CPU cores available on the system.
+- It provides details such as CPU model, speed, and times.
+
+```javascript
+console.log(os.cpus());
+```
+
+### 5. os.totalmem()
+
+- Returns the total amount of system memory (RAM) in bytes.
+
+```javascript
+console.log(os.totalmem());
+```
+
+### 6. os.freemem()
+
+- Returns the amount of currently free system memory in bytes.
+
+```javascript
+console.log(os.freemem());
+```
+
+### 7. os.homedir()
+
+- Returns the home directory of the current user.
+
+```javascript
+console.log(os.homedir());
+```
+
+**Example Output:**
+```text
+C:\Users\hp
+```
+
+### 8. os.uptime()
+
+- Returns the system uptime in seconds.
+- It tells us how long the system has been running.
+
+```javascript
+console.log(os.uptime());
+```
+
+## Important OS Module Methods – Summary
+
+| Method | Description |
+|---|---|
+| `os.arch()` | Returns CPU architecture. |
+| `os.platform()` | Returns operating system platform. |
+| `os.hostname()` | Returns computer hostname. |
+| `os.cpus()` | Returns CPU information. |
+| `os.totalmem()` | Returns total RAM in bytes. |
+| `os.freemem()` | Returns free RAM in bytes. |
+| `os.homedir()` | Returns user's home directory. |
+| `os.uptime()` | Returns system uptime in seconds. |
+
+### Example: Using Multiple OS Methods
+
+```javascript
+const os = require("os");
+
+console.log("Platform:", os.platform());
+console.log("Architecture:", os.arch());
+console.log("Hostname:", os.hostname());
+console.log("Home Directory:", os.homedir());
+console.log("Total Memory:", os.totalmem());
+console.log("Free Memory:", os.freemem());
+console.log("System Uptime:", os.uptime());
+```
+
+---
+
+# 11. Path Module in Node.js
+
+## What is the Path Module?
+
+- The Path module is a built-in core module in Node.js.
+- It provides utilities for working with file and directory paths.
+- It helps us create, manipulate, join, and extract information from file paths.
+- It handles differences in path formats between operating systems such as Windows and Linux.
+- We don't need to install any external package to use it.
+
+### Importing the Path Module
+
+```javascript
+const path = require("path");
+```
+
+## Commonly Used Path Module Methods
+
+### 1. path.basename()
+
+- Returns the last portion of a given path.
+- Generally, it returns the file name, including its extension.
+
+```javascript
+const path = require("path");
+
+const filePath = "D:/Backend-Analysis/index.js";
+
+console.log(path.basename(filePath));
+```
+
+**Output:**
+```text
+index.js
+```
+
+### 2. path.dirname()
+
+- Returns the directory name of a given path.
+- It removes the last portion (file name) from the path.
+
+```javascript
+const path = require("path");
+
+const filePath = "D:/Backend-Analysis/index.js";
+
+console.log(path.dirname(filePath));
+```
+
+**Output:**
+```text
+D:/Backend-Analysis
+```
+
+### 3. path.extname()
+
+- Returns the extension of a file, including the dot.
+
+```javascript
+const path = require("path");
+
+const filePath = "D:/Backend-Analysis/index.js";
+
+console.log(path.extname(filePath));
+```
+
+**Output:**
+```text
+.js
+```
+
+### 4. path.join()
+
+- Joins multiple path segments into a single path.
+- It automatically handles the appropriate path separator according to the operating system.
+
+```javascript
+const path = require("path");
+
+const filePath = path.join("folder", "student", "bio.txt");
+
+console.log(filePath);
+```
+
+**Output on Windows:**
+```text
+folder\student\bio.txt
+```
+
+### 5. path.resolve()
+
+- Converts a sequence of path segments into an absolute path.
+- It resolves the path relative to the current working directory if the path is not already absolute.
+
+```javascript
+const path = require("path");
+
+const filePath = path.resolve("folder", "student", "bio.txt");
+
+console.log(filePath);
+```
+
+**Example Output:**
+```text
+C:\Users\hp\Backend-Analysis\folder\student\bio.txt
+```
+
+### 6. path.parse()
+
+- Returns detailed information about a given path in the form of an object.
+- It provides properties such as root, dir, base, ext, and name.
+
+```javascript
+const path = require("path");
+
+const filePath = "D:/Backend-Analysis/index.js";
+
+console.log(path.parse(filePath));
+```
+
+**Output:**
+```javascript
+{
+  root: 'D:/',
+  dir: 'D:/Backend-Analysis',
+  base: 'index.js',
+  ext: '.js',
+  name: 'index'
+}
+```
+
+### 7. path.isAbsolute()
+
+- Checks whether a given path is absolute or relative.
+- Returns `true` if the path is absolute; otherwise, returns `false`.
+
+```javascript
+const path = require("path");
+
+console.log(path.isAbsolute("D:/Backend-Analysis/index.js"));
+console.log(path.isAbsolute("index.js"));
+```
+
+**Output:**
+```text
+true
+false
+```
+
+## Important Path Module Methods – Summary
+
+| Method | Description |
+|---|---|
+| `path.basename()` | Returns the file name from a path. |
+| `path.dirname()` | Returns the directory portion of a path. |
+| `path.extname()` | Returns the file extension. |
+| `path.join()` | Joins multiple path segments. |
+| `path.resolve()` | Generates an absolute path. |
+| `path.parse()` | Returns detailed path information as an object. |
+| `path.isAbsolute()` | Checks whether a path is absolute. |
+
+---
+
+# 12. Difference Between OS and Path Modules
+
+| OS Module | Path Module |
+|---|---|
+| Provides information about the operating system. | Provides utilities for handling file paths. |
+| Used to access system-related information. | Used to manipulate file and directory paths. |
+| Example: `os.platform()` | Example: `path.join()` |
+| Example: `os.arch()` | Example: `path.basename()` |
+
+## Important Points to Remember
+
+1. Both `os` and `path` are built-in Node.js core modules.
+2. We can import them using `require()`.
+3. The OS module provides system information.
+4. The Path module helps us work with file and directory paths.
+5. `path.join()` joins path segments.
+6. `path.resolve()` generates an absolute path.
+7. `path.basename()` extracts the last portion of a path.
+8. `path.extname()` extracts the file extension.
+
+---
+
+---
+
+# 12. Import and Export Modules in Node.js
+
+## What are Modules?
+
+- Modules are reusable blocks of code that help us organize our application.
+- Instead of writing all the code in a single file, we can divide it into multiple files.
+- We can export functions, variables, and objects from one file and use them in another file.
+- This makes the code more organized, reusable, and easier to maintain.
+
+## Why do we use Modules?
+
+1. **Code Reusability:** We can use the same code in multiple files.
+2. **Code Organization:** We can divide a large application into smaller files.
+3. **Maintainability:** It becomes easier to manage and update code.
+4. **Avoid Repetition:** We don't need to write the same functions again and again.
+
+## CommonJS Module System
+
+Node.js supports the CommonJS module system, which uses:
+
+- `module.exports` – Used to export functions, variables, and objects from a file.
+- `require()` – Used to import exported modules into another file.
+
+### 1. Exporting a Single Function
+
+Suppose we have two files:
+
+```text
+importExportModule/
+    |
+    |-- index.js
+    |
+    |-- operator.js
+```
+
+**operator.js**
+
+```javascript
+const add = (a, b) => {
+    return a + b;
+};
+
+module.exports = add;
+```
+
+**Explanation:**
+
+- We created an arrow function named `add`.
+- `module.exports = add` exports the function.
+- Now this function can be used in another file.
+
+**index.js**
+
+```javascript
+const oper = require("./operator");
+
+console.log(oper(5, 6));
+```
+
+**Output:**
+
+```text
+11
+```
+
+**Explanation:**
+
+- `require("./operator")` imports the exported function from `operator.js`.
+- `oper` stores the imported function.
+- `oper(5, 6)` calls the function with two arguments.
+- The result is 11.
+
+**Important:** When we export a single function directly, we can call it using the imported variable.
+
+### 2. Exporting Multiple Functions and Variables
+
+We can also export multiple functions and variables from a single file.
+
+**operator.js**
+
+```javascript
+const add = (a, b) => {
+    return a + b;
+};
+
+const sub = (a, b) => {
+    return a - b;
+};
+
+const mult = (a, b) => {
+    return a * b;
+};
+
+const name = "Mehnaz";
+
+module.exports.add = add;
+module.exports.sub = sub;
+module.exports.mult = mult;
+module.exports.name = name;
+```
+
+**Explanation:**
+
+- We created three functions: `add`, `sub`, and `mult`.
+- We also created a variable named `name`.
+- Using `module.exports`, we exported all these functions and the variable.
+- Each property is made available to other files.
+
+**index.js**
+
+```javascript
+const oper = require("./operator");
+
+console.log(oper.add(5, 6));
+console.log(oper.sub(15, 6));
+console.log(oper.mult(15, 6));
+console.log(oper.name);
+```
+
+**Output:**
+
+```text
+11
+9
+90
+Mehnaz
+```
+
+### 3. Another Way: Object Destructuring
+
+Instead of repeatedly writing `oper.add()`, `oper.sub()`, etc., we can directly extract the required functions and variables using object destructuring.
+
+**index.js**
+
+```javascript
+const { add, sub, mult, name } = require("./operator");
+
+console.log(add(5, 6));
+console.log(sub(15, 6));
+console.log(mult(15, 6));
+console.log(name);
+```
+
+**Output:**
+
+```text
+11
+9
+90
+Mehnaz
+```
+
+**Explanation:**
+
+- `require("./operator")` imports the exported object.
+- `{ add, sub, mult, name }` extracts the properties from that object.
+- Now we can directly use their names without writing `oper.` every time.
+
+---
+
+## Important Terms to Remember
+
+| Term | Description |
+|---|---|
+| `module.exports` | Exports functions, variables, or objects from a module. |
+| `require()` | Imports a module into another file. |
+| `./` | Represents the current directory when specifying a relative module path. |
+| Object Destructuring | Extracts properties from an object into separate variables. |
+
+## Difference Between the Two Exporting Approaches
+
+| Single Export | Multiple Exports |
+|---|---|
+| Exports one function or value directly. | Exports multiple functions or values. |
+| `module.exports = add` | `module.exports.add = add` |
+| Imported function can be called directly. | Imported properties can be accessed using dot notation or destructuring. |
+
+## Important Points to Remember
+
+1. Node.js allows us to divide code into multiple modules.
+2. `module.exports` is used to export data from a file.
+3. `require()` is used to import data from another file.
+4. We can export a single function directly.
+5. We can also export multiple functions and variables using object properties.
+6. Object destructuring allows us to access exported properties directly.
+7. `./operator` refers to the `operator.js` file in the current directory.
+
+**Note:** If we assign `module.exports` directly more than once, the previous exported value is replaced. To export multiple functions, use object properties or export an object containing all the functions.
+
+---
