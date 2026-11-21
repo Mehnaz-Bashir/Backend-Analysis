@@ -265,5 +265,110 @@ console.log(os.arch());
 **Note:** Node.js supports both CommonJS (`require`) and ES Modules (`import`) for working with modules.
 
 ---
+# 8. File System Module (fs) in Node.js
 
-*End of Node.js Introduction Notes.*
+### What is the fs Module?
+
+- `fs` stands for File System.
+- It is a built-in Node.js core module.
+- It allows us to perform operations on files and directories, such as creating, reading, writing, updating, and deleting files.
+- We don't need to install any external package to use it.
+
+### Importing the fs Module
+
+```javascript
+const fs = require("fs");
+```
+
+## Common fs Module Methods
+
+### 1. mkdirSync()
+
+- Used to create a new directory (folder).
+- Sync stands for synchronous execution.
+
+```javascript
+fs.mkdirSync("mehnaz");
+```
+
+This creates a folder named `mehnaz`.
+
+### 2. writeFileSync()
+
+- Used to create a new file and write data into it.
+- If the file already exists, its previous content gets overwritten.
+
+```javascript
+fs.writeFileSync("mehnaz/bio.txt", "My name is Mehnaz Bashir");
+```
+
+This creates `bio.txt` inside the `mehnaz` folder and writes the given text into it.
+
+### 3. appendFileSync()
+
+- Used to add new content to an existing file.
+- It does not remove the previous content.
+
+```javascript
+fs.appendFileSync("mehnaz/bio.txt", " Learning Node.js");
+```
+
+This adds the new text at the end of the existing file.
+
+### 4. readFileSync()
+
+- Used to read the content of a file.
+- We can use `utf8` encoding to get the output as a readable string.
+
+```javascript
+const data = fs.readFileSync("mehnaz/bio.txt", "utf8");
+
+console.log(data);
+```
+
+**Output:**
+
+```text
+My name is Mehnaz Bashir Learning Node.js
+```
+
+### 5. renameSync()
+
+- Used to rename an existing file or move it to another location.
+
+```javascript
+fs.renameSync("mehnaz/bio.txt", "mehnaz/myBio.txt");
+```
+
+This renames `bio.txt` to `myBio.txt`.
+
+### 6. unlinkSync()
+
+- Used to delete a file.
+
+```javascript
+fs.unlinkSync("mehnaz/myBio.txt");
+```
+
+This deletes the `myBio.txt` file.
+
+### 7. rmdirSync()
+
+- Used to delete an empty directory (folder).
+
+```javascript
+fs.rmdirSync("mehnaz");
+```
+
+This deletes the `mehnaz` folder if it is empty.
+
+---
+
+## Important Notes
+
+- `Sync` means synchronous execution.
+- Synchronous operations execute one operation at a time and block further JavaScript execution until the operation finishes.
+- `fs` is a built-in Node.js module, so no installation is required.
+- `writeFileSync()` overwrites existing file content.
+- `appendFileSync()` adds content without removing existing content.
+- `unlinkSync()` deletes files, whereas `rmdirSync()` removes empty directories.
