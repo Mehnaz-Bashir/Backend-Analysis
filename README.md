@@ -372,3 +372,175 @@ This deletes the `mehnaz` folder if it is empty.
 - `writeFileSync()` overwrites existing file content.
 - `appendFileSync()` adds content without removing existing content.
 - `unlinkSync()` deletes files, whereas `rmdirSync()` removes empty directories.
+
+
+---
+
+# 9. Synchronous vs Asynchronous in Node.js
+
+## What is Synchronous (Sync)?
+
+- Synchronous means executing operations one after another.
+- The next operation waits until the current operation is completed.
+- It blocks the execution of further JavaScript code until the current operation finishes.
+- It is also known as **blocking execution**.
+
+### Example: readFileSync()
+
+```javascript
+const fs = require("fs");
+
+console.log("1. Start");
+
+const data = fs.readFileSync("bio.txt", "utf8");
+
+console.log(data);
+
+console.log("3. End");
+```
+
+**Execution Order:**
+
+```text
+1. Start
+    |
+    v
+Read bio.txt
+    |
+    v
+Wait until file is completely read
+    |
+    v
+Print file data
+    |
+    v
+3. End
+```
+
+**Explanation:**
+
+- First, `Start` is printed.
+- Then `readFileSync()` reads the file.
+- JavaScript waits until the file-reading operation is completed.
+- After reading the file, its content is printed.
+- Finally, `End` is printed.
+
+---
+
+## What is Asynchronous (Async)?
+
+- Asynchronous means an operation can start without blocking the execution of the remaining JavaScript code.
+- The program does not need to wait for the current operation to finish before executing the next statement.
+- Once the operation is completed, its callback function is executed with the result.
+- It is also known as **non-blocking execution**.
+
+### Example: readFile()
+
+```javascript
+const fs = require("fs");
+
+console.log("1. Start");
+
+fs.readFile("bio.txt", "utf8", (err, data) => {
+    if (err) {
+        console.log(err);
+        return;
+    }
+
+    console.log(data);
+});
+
+console.log("3. End");
+```
+
+**Execution Order:**
+
+```text
+1. Start
+    |
+    v
+Start reading bio.txt
+    |
+    v
+Continue executing next statement
+    |
+    v
+3. End
+    |
+    v
+File reading completes
+    |
+    v
+Callback executes and prints data
+```
+
+**Explanation:**
+
+- First, `Start` is printed.
+- Then `readFile()` starts reading the file.
+- Since it is asynchronous, JavaScript does not wait for the file-reading operation.
+- The next statement executes and prints `End`.
+- When file reading is completed, the callback function executes and prints the file content.
+
+---
+
+## Difference Between Synchronous and Asynchronous
+
+| Synchronous (Sync) | Asynchronous (Async) |
+|---|---|
+| Executes operations sequentially. | Allows other code to execute while waiting. |
+| Blocks further JavaScript execution during the operation. | Does not block the main JavaScript thread while waiting for I/O. |
+| The next operation waits for the current operation. | The next operation can execute without waiting for the current I/O operation. |
+| Easier to understand. | Requires handling callbacks, promises, or async/await. |
+| Can reduce application responsiveness. | Helps improve application responsiveness. |
+| Example: `readFileSync()` | Example: `readFile()` |
+
+---
+
+## Synchronous and Asynchronous File System Methods
+
+| Synchronous Methods | Asynchronous Methods |
+|---|---|
+| `mkdirSync()` | `mkdir()` |
+| `writeFileSync()` | `writeFile()` |
+| `appendFileSync()` | `appendFile()` |
+| `readFileSync()` | `readFile()` |
+| `renameSync()` | `rename()` |
+| `unlinkSync()` | `unlink()` |
+| `rmdirSync()` | `rmdir()` |
+
+**Note:** The asynchronous callback-based methods generally accept a callback function to handle the result or error.
+
+---
+
+## Real-Life Example
+
+### Synchronous
+
+Imagine you order food at a restaurant and stand at the counter until your food is ready. You do not do anything else during that time.
+
+### Asynchronous
+
+Imagine you order food, sit at your table, and use your phone while waiting. When your food is ready, the waiter informs you.
+
+---
+
+## Why is Asynchronous Programming Important in Node.js?
+
+- Node.js is designed to handle multiple concurrent operations efficiently.
+- Asynchronous programming prevents the main JavaScript thread from being blocked while waiting for I/O operations.
+- It helps applications remain responsive.
+- It is particularly useful for server-side applications that handle multiple client requests.
+
+## Important Points to Remember
+
+1. Sync means blocking execution.
+2. Async means non-blocking execution.
+3. `readFileSync()` is a synchronous method.
+4. `readFile()` is an asynchronous method.
+5. Synchronous operations wait for completion before moving to the next statement.
+6. Asynchronous operations allow other JavaScript code to execute while waiting for I/O completion.
+7. Asynchronous programming is important in Node.js backend development.
+
+---
+
