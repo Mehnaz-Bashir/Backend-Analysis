@@ -1056,3 +1056,60 @@ Mehnaz
 **Note:** If we assign `module.exports` directly more than once, the previous exported value is replaced. To export multiple functions, use object properties or export an object containing all the functions.
 
 ---
+
+---
+
+# 13. NPM and Important Project Files
+
+## What is NPM?
+
+- NPM stands for Node Package Manager.
+- It is the default package manager for Node.js.
+- It is used to install, manage, and update external packages (libraries) in a project.
+- It also provides an online registry where developers can find and download packages.
+
+## Important NPM Commands
+
+| Command | Purpose |
+|---|---|
+| `npm init` | Creates a package.json file. |
+| `npm init -y` | Creates package.json with default settings. |
+| `npm install package-name` | Installs a package. |
+| `npm uninstall package-name` | Removes a package. |
+| `npm install` | Installs all dependencies listed in package.json. |
+| `npm list` | Displays installed packages. |
+
+## Important Files and Folders
+
+When we install an NPM package, some important files and folders are created.
+
+### 1. node_modules
+
+- It is a folder that contains all the installed packages and their dependencies.
+- It is automatically created when we install packages.
+- It can become large because it stores package files.
+
+### 2. package.json
+
+- It is the main configuration file of a Node.js project.
+- It contains project information such as name, version, scripts, and dependencies.
+- It keeps track of the packages required by the project.
+
+### 3. package-lock.json
+
+- It is automatically generated or updated when NPM installs or changes packages.
+- It stores the exact installed versions of packages and their dependency details.
+- It helps maintain consistent installations across different systems.
+
+## Difference Between Important Files
+
+| Name | Purpose |
+|---|---|
+| `node_modules` | Stores installed packages. |
+| `package.json` | Stores project details and dependency requirements. |
+| `package-lock.json` | Stores exact dependency versions and installation details. |
+
+
+
+---
+
