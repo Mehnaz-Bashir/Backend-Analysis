@@ -1113,3 +1113,107 @@ When we install an NPM package, some important files and folders are created.
 
 ---
 
+---
+
+# 14. Nodemon in Node.js
+
+## What is Nodemon?
+
+- Nodemon is an NPM package used during Node.js development.
+- It automatically restarts the Node.js application whenever changes are made to the code.
+- It saves us from manually restarting the application after every change.
+
+### Installing Nodemon
+
+```bash
+npm install --save-dev nodemon
+```
+
+### Running a File Using Nodemon
+
+```bash
+npx nodemon index.js
+```
+
+### Important Points
+
+- Nodemon automatically detects file changes.
+- It restarts the application whenever the file is saved.
+- It is mainly used during development.
+- `--save-dev` installs a package as a development dependency.
+
+---
+
+# 15. Module Wrapper Function in Node.js
+
+## What is Module Wrapper Function?
+
+- Node.js internally wraps every CommonJS module's code inside a function before executing it.
+- This function is called the Module Wrapper Function.
+- It provides special variables to every CommonJS module.
+
+### Module Wrapper Function Syntax
+
+```javascript
+(function(exports, require, module, __filename, __dirname) {
+
+    // Your JavaScript code
+
+});
+```
+
+### Five Parameters of Module Wrapper Function
+
+| Parameter | Description |
+|---|---|
+| `exports` | Used to export values from a module. |
+| `require` | Used to import other modules. |
+| `module` | Represents the current module. |
+| `__filename` | Returns the absolute path of the current file. |
+| `__dirname` | Returns the absolute path of the current directory. |
+
+## Example 1: __dirname and __filename
+
+```javascript
+console.log(__dirname);
+console.log(__filename);
+```
+
+**Output example:**
+
+```text
+C:\Users\hp\Desktop\Backend-Analysis
+
+C:\Users\hp\Desktop\Backend-Analysis\index.js
+```
+
+- `__dirname` gives the current directory path.
+- `__filename` gives the complete file path.
+
+## Example 2: module and exports
+
+```javascript
+console.log(module);
+console.log(exports);
+```
+
+- `module` represents the current module.
+- `exports` is initially a reference to `module.exports`.
+- `module.exports` is used to export functions, variables, and objects.
+
+## Why is Module Wrapper Function Used?
+
+1. It provides a separate scope to each CommonJS module.
+2. It prevents variables from automatically becoming global.
+3. It provides special variables such as `require`, `module`, `__dirname`, and `__filename`.
+4. It helps Node.js manage modules independently.
+
+## Important Points to Remember
+
+- Node.js internally creates the Module Wrapper Function.
+- We don't need to write it manually.
+- It is used with the CommonJS module system.
+- It contains five parameters: `exports`, `require`, `module`, `__filename`, and `__dirname`.
+
+---
+
