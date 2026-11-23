@@ -1217,3 +1217,147 @@ console.log(exports);
 
 ---
 
+---
+
+# 16. Web Server and Routing in Node.js
+
+## 1. What is a Web Server?
+
+- A web server is a software system that receives requests from clients and sends responses.
+- It allows users to access web pages and other resources through a browser.
+- Node.js can create a web server using its built-in `http` module.
+
+## 2. HTTP Module
+
+- HTTP stands for HyperText Transfer Protocol.
+- It is a built-in Node.js module used to create HTTP servers and handle HTTP requests and responses.
+- We don't need to install it separately.
+
+```javascript
+const http = require("http");
+```
+
+## 3. Creating a Web Server
+
+Node.js provides the `http.createServer()` method to create a web server.
+
+### Syntax
+
+```javascript
+http.createServer((req, res) => {
+    // Handle request and send response
+});
+```
+
+### Important Objects
+
+**1. Request (req)**
+
+- The request object contains information about the client's request.
+- It can be used to access the requested URL, headers, and other request details.
+- Example: `req.url`
+
+**2. Response (res)**
+
+- The response object is used to send a response back to the client.
+- We can send text, HTML, and other data using it.
+- Example: `res.end()`
+
+## 4. What is Routing?
+
+- Routing means directing a client's request to the appropriate response based on the requested URL.
+- Different URLs can display different content.
+- In Node.js, we can create basic routing using `req.url` and conditional statements.
+
+### Example of Routing
+
+```javascript
+const http = require("http");
+
+const server = http.createServer((req, res) => {
+
+    if (req.url === "/") {
+        res.end("Hello from the home page");
+
+    } else if (req.url === "/about") {
+        res.end("Hello from the About Us page");
+
+    } else if (req.url === "/contact") {
+        res.end("Hello from the Contact Us page");
+
+    } else {
+        res.writeHead(404, { "Content-Type": "text/html" });
+        res.end("<h1>404 Error: Page doesn't exist!</h1>");
+    }
+
+});
+
+server.listen(8000, "127.0.0.1", () => {
+    console.log("Listening on port 8000");
+});
+```
+
+### Explanation
+
+- `http.createServer()` creates the HTTP server.
+- `req.url` checks which URL the client has requested.
+- `res.end()` sends the response and ends it.
+- `if-else` conditions handle different routes.
+- If the requested URL doesn't match any route, a 404 error is returned.
+
+## 5. Important HTTP Methods
+
+| Method | Purpose |
+|---|---|
+| `http.createServer()` | Creates an HTTP server. |
+| `res.writeHead()` | Sends the response status code and headers. |
+| `res.end()` | Sends the response and ends it. |
+| `server.listen()` | Starts the server and listens for incoming requests. |
+
+## 6. Understanding server.listen()
+
+```javascript
+server.listen(8000, "127.0.0.1", () => {
+    console.log("Listening on port 8000");
+});
+```
+
+- `8000` – Port number on which the server listens.
+- `127.0.0.1` – Localhost (the current computer).
+- Callback function – Executes when the server starts listening.
+
+### How to Access the Server?
+
+After running the file:
+
+```bash
+node index.js
+```
+
+Open your browser and visit:
+
+| URL | Response |
+|---|---|
+| `http://127.0.0.1:8000/` | Home page |
+| `http://127.0.0.1:8000/about` | About Us page |
+| `http://127.0.0.1:8000/contact` | Contact Us page |
+| `http://127.0.0.1:8000/xyz` | 404 Error |
+
+## 7. What is a 404 Error?
+
+- HTTP 404 is a status code that means the requested resource was not found.
+- It is returned when the requested page or route does not exist.
+
+## Important Points to Remember
+
+1. Node.js provides a built-in `http` module to create web servers.
+2. `http.createServer()` creates the server.
+3. `req` represents the incoming request.
+4. `res` represents the outgoing response.
+5. `req.url` helps identify the requested route.
+6. `res.end()` sends the response and ends it.
+7. `server.listen()` starts the server.
+8. Port 8000 is the port used in our example.
+9. A 404 status code indicates that the requested resource was not found.
+
+---
