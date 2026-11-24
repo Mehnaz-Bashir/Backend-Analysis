@@ -1361,3 +1361,220 @@ Open your browser and visit:
 9. A 404 status code indicates that the requested resource was not found.
 
 ---
+---
+
+# 17. JSON in Node.js
+
+## What is JSON?
+
+- JSON stands for JavaScript Object Notation.
+- It is a lightweight format used to store and exchange data.
+- JSON stores data in key-value pairs.
+- It is commonly used to exchange data between a client and a server.
+
+### JSON Example
+
+```json
+{
+    "name": "Mehnaz",
+    "age": 24,
+    "course": "MCA"
+}
+```
+
+### Important JSON Methods
+
+| Method | Purpose |
+|---|---|
+| `JSON.stringify()` | Converts a JavaScript object into a JSON string. |
+| `JSON.parse()` | Converts a JSON string into a JavaScript object. |
+
+### Important Points
+
+- JSON data is written using key-value pairs.
+- Keys and string values must use double quotes.
+- JSON is commonly used in APIs to exchange data.
+- JSON files use the `.json` extension.
+
+---
+
+# 18. User API in Node.js
+
+## What is an API?
+
+- API stands for Application Programming Interface.
+- It allows two applications to communicate with each other.
+- In Node.js, APIs are commonly used to receive requests and send responses.
+
+## What is a User API?
+
+- A User API is an API used to manage user-related information.
+- It can perform operations such as creating, reading, updating, and deleting user data.
+
+### Common User API Operations
+
+| Operation | Purpose |
+|---|---|
+| Create User | Adds a new user. |
+| Get User | Retrieves user information. |
+| Update User | Modifies existing user information. |
+| Delete User | Removes a user. |
+
+### Important Points
+
+- APIs allow communication between clients and servers.
+- User APIs commonly exchange data in JSON format.
+- HTTP methods such as GET, POST, PUT, and DELETE are used for different operations.
+
+---
+
+# 19. Event Module in Node.js
+
+## What is Event Module?
+
+- Node.js provides a built-in module called `events`.
+- It allows us to create, listen for, and trigger our own events.
+- It is useful for handling event-based operations.
+
+## EventEmitter
+
+- EventEmitter is a class provided by the `events` module.
+- We create an object of EventEmitter to work with events.
+
+### Importing Event Module
+
+```javascript
+const EventEmitter = require("events");
+
+const event = new EventEmitter();
+```
+
+### Important Event Methods
+
+| Method | Purpose |
+|---|---|
+| `event.on()` | Registers a listener for an event. |
+| `event.emit()` | Triggers an event. |
+| `event.once()` | Registers a listener that executes only once. |
+
+## Example 1: Creating and Triggering an Event
+
+```javascript
+const EventEmitter = require("events");
+
+const event = new EventEmitter();
+
+event.on("sayMyName", () => {
+    console.log("Your name is Mehnaz Bashir");
+});
+
+event.emit("sayMyName");
+```
+
+**Output:**
+
+```text
+Your name is Mehnaz Bashir
+```
+
+**Explanation:**
+
+- `EventEmitter` imports the event module.
+- `new EventEmitter()` creates an event object.
+- `event.on()` registers an event listener.
+- `event.emit()` triggers the registered event.
+
+## Example 2: Registering Multiple Listeners
+
+```javascript
+const EventEmitter = require("events");
+
+const event = new EventEmitter();
+
+event.on("sayMyName", () => {
+    console.log("Your name is Mehnaz Bashir");
+});
+
+event.on("sayMyName", () => {
+    console.log("Your age is 24");
+});
+
+event.on("sayMyName", () => {
+    console.log("Your course is MCA");
+});
+
+event.emit("sayMyName");
+```
+
+**Output:**
+
+```text
+Your name is Mehnaz Bashir
+Your age is 24
+Your course is MCA
+```
+
+**Explanation:**
+
+- We registered three listeners for the same event.
+- When `event.emit()` is called, all three listeners execute.
+- They execute in the order in which they were registered.
+
+## Example 3: Event with Callback Parameters
+
+We can also pass arguments while triggering an event.
+
+```javascript
+const EventEmitter = require("events");
+
+const event = new EventEmitter();
+
+event.on("checkPage", (sc, msg) => {
+    console.log(`Status code is ${sc} and the page is ${msg}`);
+});
+
+event.emit("checkPage", 200, "OK");
+```
+
+**Output:**
+
+```text
+Status code is 200 and the page is OK
+```
+
+**Explanation:**
+
+- `event.on()` registers a listener with two parameters: `sc` and `msg`.
+- `event.emit()` triggers the event and passes two arguments.
+- The callback receives these arguments and displays them.
+
+## Example 4: Using once()
+
+```javascript
+event.once("sayHello", () => {
+    console.log("Hello Mehnaz!");
+});
+
+event.emit("sayHello");
+event.emit("sayHello");
+```
+
+**Output:**
+
+```text
+Hello Mehnaz!
+```
+
+The listener executes only once, even though the event is emitted twice.
+
+## Important Points to Remember
+
+1. `events` is a built-in Node.js module.
+2. EventEmitter is a class used to create event-based functionality.
+3. `event.on()` registers an event listener.
+4. `event.emit()` triggers an event.
+5. Multiple listeners can be registered for the same event.
+6. We can pass arguments through `event.emit()`.
+7. `event.once()` executes a listener only once.
+
+---
