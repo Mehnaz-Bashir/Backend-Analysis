@@ -1578,3 +1578,134 @@ The listener executes only once, even though the event is emitted twice.
 7. `event.once()` executes a listener only once.
 
 ---
+---
+
+# 20. Streams in Node.js
+
+## What are Streams?
+
+- Streams are used to handle data in small chunks instead of loading the entire data into memory at once.
+- They are useful for reading and writing large files.
+- Streams make data handling more memory-efficient and faster.
+
+## Why do we use Streams?
+
+1. To handle large files efficiently.
+2. To reduce memory usage.
+3. To process data in chunks.
+4. To read or write data without waiting for the entire file to load.
+
+## What is a Chunk?
+
+- A chunk is a small piece of data.
+- Streams process data chunk by chunk instead of handling the complete data at once.
+
+## Types of Streams in Node.js
+
+Node.js provides four main types of streams.
+
+| Type | Description |
+|---|---|
+| Readable | Used to read data. |
+| Writable | Used to write data. |
+| Duplex | Used for both reading and writing data. |
+| Transform | Used to modify data while reading and writing. |
+
+## 1. Readable Stream
+
+- A readable stream is used to read data from a source.
+- Example: Reading a large file.
+
+```javascript
+const fs = require("fs");
+
+const readStream = fs.createReadStream("read.txt", "utf8");
+
+readStream.on("data", (chunk) => {
+    console.log(chunk);
+});
+```
+
+## 2. Writable Stream
+
+- A writable stream is used to write data to a destination.
+- Example: Writing data into a file.
+
+```javascript
+const fs = require("fs");
+
+const writeStream = fs.createWriteStream("write.txt");
+
+writeStream.write("Hello Node.js!");
+writeStream.end();
+```
+
+## 3. Duplex Stream
+
+- A duplex stream is used for both reading and writing data.
+- It can read and write independently.
+
+Example: TCP sockets.
+
+## 4. Transform Stream
+
+- A transform stream is a type of duplex stream.
+- It is used to modify or transform data while it is being read and written.
+
+Example: Compressing or encrypting data.
+
+## Important Stream Methods and Events
+
+| Method / Event | Purpose |
+|---|---|
+| `createReadStream()` | Creates a readable stream. |
+| `createWriteStream()` | Creates a writable stream. |
+| `.write()` | Writes data into a stream. |
+| `.end()` | Signals that no more data will be written. |
+| `.on("data")` | Listens for incoming data chunks. |
+| `.on("end")` | Executes when reading is completed. |
+| `.on("error")` | Handles stream errors. |
+| `.pipe()` | Connects a readable stream to a writable stream. |
+
+## What is pipe()?
+
+- `pipe()` is used to transfer data from a readable stream to a writable stream.
+- It makes transferring large amounts of data easier.
+
+### Example
+
+```javascript
+const fs = require("fs");
+
+const readStream = fs.createReadStream("read.txt");
+
+const writeStream = fs.createWriteStream("write.txt");
+
+readStream.pipe(writeStream);
+```
+
+**Explanation:**
+- `readStream` reads data from `read.txt`.
+- `writeStream` writes data into `write.txt`.
+- `pipe()` transfers data directly from the readable stream to the writable stream.
+
+## Difference Between Normal File Reading and Streams
+
+| Normal Reading | Streams |
+|---|---|
+| Reads the entire file into memory (for example, `readFile`). | Reads data in smaller chunks. |
+| Can consume more memory for large files. | More memory-efficient for large files. |
+| Suitable for smaller files. | Suitable for large files and continuous data. |
+
+## Important Points to Remember
+
+1. Streams handle data in small chunks.
+2. Streams help reduce memory usage.
+3. Node.js provides four types of streams.
+4. Readable streams read data.
+5. Writable streams write data.
+6. Duplex streams support both reading and writing.
+7. Transform streams modify data while processing it.
+8. `pipe()` connects readable and writable streams.
+
+---
